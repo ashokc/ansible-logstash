@@ -34,6 +34,8 @@ elk_version : 5.6.1
 es_apt_key : https://artifacts.elastic.co/GPG-KEY-elasticsearch
 es_apt_url : deb https://artifacts.elastic.co/packages/{{ es_major_version }}/apt stable main
 update_java: False
+logstash_user: logstashUser
+logstash_group: logstashGroup
 logstash_enabled_on_boot : yes
 logstash_version : "{{ elk_version }}"
 filebeat_2_logstash_port: 5044
