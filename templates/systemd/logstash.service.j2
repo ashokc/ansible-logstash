@@ -1,0 +1,25 @@
+[Unit]
+Description=logstash on {{inventory_hostname}}
+Documentation=http://www.elastic.co
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Type=simple
+
+{% if (logstash_user is defined) and (logstash_group is defined) %}
+User={{logstash_user}}
+Group={{logstash_group}}
+{% endif %}
+
+# Load env vars from /etc/default/ and /etc/sysconfig/ if they exist.
+# Prefixing the path with '-' makes it try to load, but if the file doesn't
+# exist, it continues onward.
+EnvironmentFile=-{{logstash_environment}}
+ExecStart={{logstash_home_dir}}/bin/logstash --config.reload.automatic --path.settings {{logstash_settings_dir}} --path.config {{logstash_conf_dir}} --path.logs {{logstash_logs_dir}} --path.data {{logstash_data_dir}}
+Restart=always
+WorkingDirectory={{logstash_home_dir}}
+
+[Install]
+WantedBy=multi-user.target
+

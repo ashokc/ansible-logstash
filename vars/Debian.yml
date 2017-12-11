@@ -1,0 +1,22 @@
+---
+java: "{% if es_java is defined %}{{es_java}}{% else %}openjdk-8-jre-headless{% endif %}"
+
+logstash_home_dir: "/usr/share/logstash"
+logstash_settings_dir: "/etc/logstash"
+logstash_logs_dir: "/var/log/logstash"
+logstash_pid_dir: "/var/run/logstash"
+
+logstash_conf_dir: "{{logstash_settings_dir}}/conf.d"
+logstash_data_dir: "{{logstash_home_dir}}/data"
+logstash_plugins_dir: "{{logstash_home_dir}}/plugins"
+
+logstash_conf_file: "{{logstash_settings_dir}}/logstash.yml"
+logstash_startup_options: "{{logstash_settings_dir}}/startup.options"
+logstash_jvm_options: "{{logstash_settings_dir}}/jvm.options"
+logstash_pid_file: "{{logstash_pid_dir}}/logstash.pid"
+
+logstash_service: "/lib/systemd/system/logstash.service"
+logstash_environment: "/etc/default/logstash"
+
+# rm /etc/default/logstash
+

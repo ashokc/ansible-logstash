@@ -1,0 +1,10 @@
+---
+
+- name: restart logstash
+  service: name=logstash state=restarted enabled={{ logstash_enabled_on_boot }}
+
+- name: reload systemd configuration
+  command: systemctl daemon-reload
+
+
+

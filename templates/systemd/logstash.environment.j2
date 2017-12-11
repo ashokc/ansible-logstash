@@ -1,0 +1,46 @@
+################################
+# Logstash
+################################
+
+SERVICE_NAME=logstash
+SERVICE_DESCRIPTION=Logstash Service Description from environment file
+
+# Java for Logstash
+JAVACMD={{java_cmd}}
+
+# Logstash home directory
+LS_HOME={{logstash_home_dir}} 
+
+# Logstash settings directory
+LS_SETTINGS_DIR={{logstash_settings_dir}}
+
+# Logstash configuration directory
+CONF_DIR={{logstash_conf_dir}}
+
+# Logstash data directory
+DATA_DIR={{logstash_data_dir}}
+
+# Logstash logs directory
+LOG_DIR={{logstash_logs_dir}}
+LS_GC_LOG_FILE={{logstash_logs_dir}}/gc.log
+
+# Logstash PID directory
+PID_DIR={{logstash_pid_dir}}
+
+# Logstash PID directory
+LS_PIDFILE={{logstash_pid_dir}}/logstash.pid
+
+# Logstash open files
+LS_OPEN_FILES=16384
+
+# Logstash nice factor
+LS_NICE=19
+
+# For systemd service, the user is usually configured in file /lib/systemd/system/logstash.service
+
+{% if (logstash_user is defined) and (logstash_group is defined) %}
+LS_USER={{logstash_user}}
+LS_GROUP={{logstash_group}}
+{% endif %}
+
+

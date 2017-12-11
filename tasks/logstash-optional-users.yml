@@ -1,0 +1,20 @@
+---
+#Add the logstash user/group before installing from packages.
+
+- name: Ensure optional logstash group is created with the correct id.
+  #Restart if these change
+  group:
+    state: present
+    name: "{{ logstash_group }}"
+    system: yes
+
+- name: Ensure optional logstash user is created with the correct id.
+  #Restart if these change
+  user:
+    state: present
+    name: "{{ logstash_user }}"
+    comment: logstash system user
+    system: yes
+    createhome: no
+    group: "{{ logstash_group }}"
+    groups: adm
