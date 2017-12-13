@@ -15,10 +15,15 @@
   include_tasks: setup-Debian.yml
   when: ansible_os_family == 'Debian'
 
-- name: Copy new config files
+- name: Copy new config files - templated
   template: src={{ item }} dest={{logstash_conf_dir}}/{{ item | basename | regex_replace('\.j2','') }}
   with_fileglob:
     - ../templates/conf/*.j2
+
+- name: Copy new config files - non-templated
+  copy: src={{ item }} dest={{logstash_conf_dir}}/{{ item | basename }}
+  with_fileglob:
+    - ../files/*.conf
 
 - name: Install plugins
   include_tasks: plugins.yml
